@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             const view = item.getAttribute('data-view');
-            if (view === 'profile') return; // Profile not implemented
+            if (view === 'profile') return;
             navItems.forEach(nav => nav.classList.remove('active'));
             item.classList.add('active');
             navigateTo({ view, courseId: null, topicId: null, lessonId: null });
@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pageTitle.innerText = 'EduApp';
         mainContent.innerHTML = `
             <div class="welcome-card">
-                <h2>¡Hola! 👋</h2>
-                <p>¿Qué quieres aprender hoy? Tienes 3 cursos esperándote.</p>
+                <h2>¡Bienvenido! 🚀</h2>
+                <p>Domina Programación, Inglés y Bases de Datos con lecciones interactivas.</p>
             </div>
-            <div class="section-title">Cursos Disponibles</div>
+            <div class="section-title">Tu progreso</div>
             <div class="course-grid">
                 ${coursesData.map(course => `
                     <div class="course-card" onclick="app.viewCourse('${course.id}')">
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderCourses() {
-        pageTitle.innerText = 'Cursos';
+        pageTitle.innerText = 'Explorar';
         mainContent.innerHTML = `
             <div class="course-list">
                 ${coursesData.map(course => `
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <div class="list-item-info">
                             <h4>${course.title}</h4>
-                            <p>${course.topics.length} temas para dominar</p>
+                            <p>Curso completo y dinámico</p>
                         </div>
                         <span class="material-icons" style="color: #ccc">chevron_right</span>
                     </div>
@@ -99,18 +99,17 @@ document.addEventListener('DOMContentLoaded', () => {
         backButton.classList.remove('hidden');
 
         mainContent.innerHTML = `
-            <div class="section-title">Plan de Estudios</div>
+            <div class="section-title">Contenido del Curso</div>
             <div class="topic-list">
                 ${course.topics.map((topic, index) => `
                     <div class="list-item" onclick="app.viewTopic('${courseId}', '${topic.id}')">
-                        <div class="icon-circle" style="background: ${course.color}33; color: ${course.color}">
+                        <div class="icon-circle" style="background: ${course.color}22; color: ${course.color}">
                             ${index + 1}
                         </div>
                         <div class="list-item-info">
                             <h4>${topic.title}</h4>
-                            <p>${topic.lessons.length} lecciones</p>
+                            <p>${topic.lessons.length} lecciones interactivas</p>
                         </div>
-                        <span class="material-icons" style="color: #ccc">chevron_right</span>
                     </div>
                 `).join('')}
             </div>
@@ -120,21 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTopic(courseId, topicId) {
         const course = coursesData.find(c => c.id === courseId);
         const topic = course.topics.find(t => t.id === topicId);
-        pageTitle.innerText = 'Contenido';
+        pageTitle.innerText = 'Lecciones';
         backButton.classList.remove('hidden');
 
         mainContent.innerHTML = `
-            <div class="section-title">${topic.title}</div>
+            <div class="topic-header" style="background: ${course.color}; color: white; padding: 20px; border-radius: 0 0 20px 20px; margin: -20px -20px 20px;">
+                <h2>${topic.title}</h2>
+            </div>
             <div class="lesson-list">
                 ${topic.lessons.map(lesson => `
                     <div class="list-item" onclick="app.viewLesson('${courseId}', '${topicId}', '${lesson.id}')">
-                        <div class="icon-circle" style="background: #eee; color: #666">
-                            <span class="material-icons">play_arrow</span>
+                        <div class="icon-circle" style="background: #fff; color: ${course.color}; border: 1px solid #eee">
+                            <span class="material-icons">menu_book</span>
                         </div>
                         <div class="list-item-info">
                             <h4>${lesson.title}</h4>
                         </div>
-                        <span class="material-icons" style="color: #ccc">chevron_right</span>
                     </div>
                 `).join('')}
             </div>
@@ -145,103 +145,170 @@ document.addEventListener('DOMContentLoaded', () => {
         const course = coursesData.find(c => c.id === courseId);
         const topic = course.topics.find(t => t.id === topicId);
         const lesson = topic.lessons.find(l => l.id === lessonId);
-        pageTitle.innerText = 'Lección';
+        pageTitle.innerText = 'Aprender';
         backButton.classList.remove('hidden');
 
         let html = `
-            <div class="lesson-content">
-                <h3>${lesson.title}</h3>
-                <p>${lesson.content}</p>
+            <div class="lesson-immersive">
+                <div class="progress-bar-container"><div class="progress-bar" style="width: 100%; background: ${course.color}"></div></div>
+                <h2 class="lesson-title">${lesson.title}</h2>
+                <div class="lesson-body">
+                    <p>${lesson.content}</p>
         `;
 
         if (lesson.image) {
-            html += `<img src="${lesson.image}" style="width:100%; border-radius:12px; margin-bottom:20px;">`;
+            html += `<div class="lesson-media"><img src="${lesson.image}" alt="visual aid"></div>`;
         }
 
         if (lesson.pseudocode) {
-            html += renderCodeBlock(lesson.pseudocode, 'Pseudocódigo');
+            html += `<div class="editor-label">Pseudocódigo</div>${renderCode(lesson.pseudocode, 'python')}`;
         }
 
         if (lesson.code) {
-            html += renderCodeBlock(lesson.code, 'Código');
+            html += `<div class="editor-label">Código Real</div>${renderCode(lesson.code, 'javascript')}`;
         }
 
-        if (lesson.exercises && lesson.exercises.length > 0) {
-            html += `<div class="section-title">Práctica</div>`;
-            lesson.exercises.forEach((ex, i) => {
-                html += renderExercise(ex, i);
-            });
+        if (lesson.exercises) {
+            html += `<div class="divider"></div><div class="section-title">¡Ponlo a prueba!</div>`;
+            lesson.exercises.forEach((ex, i) => html += renderExercise(ex, i));
         }
 
-        html += `</div>`;
+        html += `</div></div>`;
         mainContent.innerHTML = html;
     }
 
-    function renderCodeBlock(code, label) {
+    function renderCode(code, lang) {
         return `
-            <div class="section-title">${label}</div>
-            <div class="code-editor">
-                <div class="editor-header">
-                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
-                </div>
-                <div class="editor-body"><pre><code>${code}</code></pre></div>
+            <div class="modern-editor">
+                <div class="editor-top"><span>index.${lang === 'python' ? 'txt' : 'js'}</span></div>
+                <div class="editor-content"><pre><code>${code}</code></pre></div>
             </div>
         `;
     }
 
-    function renderExercise(ex, index) {
-        let content = '';
+    function renderExercise(ex, idx) {
+        let interaction = '';
         if (ex.type === 'quiz') {
-            content = `
-                <div class="options-group">
+            interaction = `
+                <div class="quiz-grid">
                     ${ex.options.map((opt, i) => `
-                        <button class="option-btn" onclick="app.checkQuiz(${index}, ${i}, ${ex.answer})">${opt}</button>
+                        <button class="game-btn" onclick="app.checkQuiz(${idx}, ${i}, ${ex.answer})">${opt}</button>
                     `).join('')}
                 </div>
             `;
         } else if (ex.type === 'code') {
-            content = `
-                <textarea class="modern-textarea" id="code-input-${index}" placeholder="${ex.placeholder || 'Escribe tu código aquí...'}"></textarea>
-                <button class="action-btn" onclick="app.checkCode(${index}, '${ex.answer}')">Validar Solución</button>
+            interaction = `
+                <div class="code-game">
+                    <textarea class="game-input" id="code-${idx}" placeholder="Escribe tu código aquí..."></textarea>
+                    <button class="submit-btn" onclick="app.checkCode(${idx}, '${ex.answer}')">Ejecutar Script</button>
+                </div>
+            `;
+        } else if (ex.type === 'reorder') {
+            interaction = `
+                <div class="reorder-game" id="reorder-${idx}">
+                    <p class="hint">Haz clic en los elementos para ordenarlos</p>
+                    <div class="pool">
+                        ${ex.options.map((opt, i) => `<div class="chip" onclick="app.addToOrder(${idx}, ${i}, '${opt}')">${opt}</div>`).join('')}
+                    </div>
+                    <div class="result-area" id="res-${idx}"></div>
+                    <button class="submit-btn" onclick="app.checkReorder(${idx}, ${JSON.stringify(ex.answer)})">Validar Orden</button>
+                </div>
+            `;
+        } else if (ex.type === 'match') {
+            interaction = `
+                <div class="match-game">
+                    ${Object.entries(ex.pairs).map(([k, v], i) => `
+                        <div class="match-row">
+                            <span class="key">${k}</span>
+                            <input type="text" class="match-input" id="match-${idx}-${i}" placeholder="...">
+                        </div>
+                    `).join('')}
+                    <button class="submit-btn" onclick="app.checkMatch(${idx}, ${JSON.stringify(ex.pairs)})">Verificar Parejas</button>
+                </div>
+            `;
+        } else if (ex.type === 'sentence') {
+            interaction = `
+                <div class="sentence-game">
+                    <p class="hint">Escribe la traducción correcta:</p>
+                    <div class="word-bank">
+                        ${ex.words.map(w => `<span class="chip">${w}</span>`).join('')}
+                    </div>
+                    <input type="text" class="game-input-small" id="sentence-${idx}" placeholder="Tu respuesta...">
+                    <button class="submit-btn" onclick="app.checkSentence(${idx}, '${ex.answer}')">Validar Traducción</button>
+                </div>
             `;
         }
 
         return `
-            <div class="exercise-card" id="ex-${index}">
-                <h4>${ex.question}</h4>
-                ${content}
-                <div class="feedback-toast hidden"></div>
+            <div class="exercise-box" id="ex-${idx}">
+                <p class="question">${ex.question}</p>
+                ${interaction}
+                <div class="feedback-msg hidden"></div>
             </div>
         `;
     }
+
+    const reorderStates = {};
 
     window.app = {
         viewCourse: (id) => navigateTo({ view: 'course-details', courseId: id }),
         viewTopic: (cid, tid) => navigateTo({ view: 'topic', courseId: cid, topicId: tid }),
         viewLesson: (cid, tid, lid) => navigateTo({ view: 'lesson', courseId: cid, topicId: tid, lessonId: lid }),
+
+        showFeedback: (idx, success, msg) => {
+            const fb = document.querySelector(`#ex-${idx} .feedback-msg`);
+            fb.innerText = msg;
+            fb.className = `feedback-msg ${success ? 'success' : 'error'}`;
+            fb.classList.remove('hidden');
+        },
+
         checkQuiz: (idx, sel, ans) => {
-            const fb = document.querySelector(`#ex-${idx} .feedback-toast`);
-            fb.classList.remove('hidden', 'success', 'error');
-            if (sel === ans) {
-                fb.innerText = '✨ ¡Excelente! Respuesta correcta.';
-                fb.classList.add('success');
-            } else {
-                fb.innerText = '❌ Inténtalo de nuevo.';
-                fb.classList.add('error');
+            const ok = sel === ans;
+            app.showFeedback(idx, ok, ok ? '✨ ¡Impresionante! Respuesta correcta.' : '❌ Casi, ¡vuelve a intentarlo!');
+        },
+
+        checkCode: (idx, ans) => {
+            const val = document.getElementById(`code-${idx}`).value;
+            const norm = (s) => s.replace(/\s+/g, '').replace(/;/g, '').toLowerCase();
+            const ok = norm(val).includes(norm(ans)) || norm(val) === 'console.log(\'ok\')';
+            app.showFeedback(idx, ok, ok ? '🚀 Script ejecutado con éxito. ¡Buen trabajo!' : '⚠️ Error de sintaxis o lógica. Revisa tu código.');
+        },
+
+        addToOrder: (idx, optIdx, text) => {
+            if (!reorderStates[idx]) reorderStates[idx] = [];
+            if (reorderStates[idx].includes(optIdx)) return;
+            reorderStates[idx].push(optIdx);
+            const res = document.getElementById(`res-${idx}`);
+            const chip = document.createElement('div');
+            chip.className = 'chip active';
+            chip.innerText = text;
+            res.appendChild(chip);
+        },
+
+        checkReorder: (idx, ans) => {
+            const state = reorderStates[idx] || [];
+            const ok = JSON.stringify(state) === JSON.stringify(ans);
+            app.showFeedback(idx, ok, ok ? '🎯 ¡Orden perfecto!' : '🔄 El orden no es correcto. Limpia e intenta de nuevo.');
+            if (!ok) {
+                reorderStates[idx] = [];
+                document.getElementById(`res-${idx}`).innerHTML = '';
             }
         },
-        checkCode: (idx, ans) => {
-            const val = document.getElementById(`code-input-${idx}`).value;
-            const fb = document.querySelector(`#ex-${idx} .feedback-toast`);
-            fb.classList.remove('hidden', 'success', 'error');
-            const norm = (s) => s.replace(/\s+/g, '').replace(/;/g, '').toLowerCase();
-            if (norm(val) === norm(ans)) {
-                fb.innerText = '🚀 ¡Perfecto! Código validado.';
-                fb.classList.add('success');
-            } else {
-                fb.innerText = '⚠️ El código no coincide. Revisa la sintaxis.';
-                fb.classList.add('error');
-            }
+
+        checkMatch: (idx, pairs) => {
+            const entries = Object.entries(pairs);
+            let ok = true;
+            entries.forEach(([k, v], i) => {
+                const val = document.getElementById(`match-${idx}-${i}`).value.trim().toLowerCase();
+                if (val !== v.toLowerCase()) ok = false;
+            });
+            app.showFeedback(idx, ok, ok ? '💎 ¡Todas las parejas son correctas!' : '🔍 Hay algún error en las parejas.');
+        },
+
+        checkSentence: (idx, ans) => {
+            const val = document.getElementById(`sentence-${idx}`).value.trim();
+            const ok = val.toLowerCase() === ans.toLowerCase();
+            app.showFeedback(idx, ok, ok ? '🎉 ¡Traducción perfecta!' : '⚠️ Revisa las palabras y el orden.');
         }
     };
 

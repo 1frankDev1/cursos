@@ -7,20 +7,85 @@ const coursesData = [
         "topics": [
             {
                 "id": "intro",
-                "title": "1. Introducción a la Programación",
+                "title": "1. Introducción y Lógica",
                 "lessons": [
                     {
                         "id": "what-is-prog",
-                        "title": "¿Qué es la Programación?",
-                        "content": "La programación es el proceso de crear un conjunto de instrucciones que le dicen a una computadora cómo realizar una tarea. Se trata de resolver problemas mediante el pensamiento lógico.",
+                        "title": "¿Qué es programar?",
+                        "content": "Programar es el arte de darle instrucciones a una computadora para que resuelva un problema por nosotros. Imagina que es como darle una receta de cocina a alguien que nunca ha cocinado: debes ser extremadamente preciso y no saltarte ningún paso. Las computadoras son muy rápidas, pero no son listas; solo hacen exactamente lo que les dices.",
                         "exercises": [
                             {
                                 "type": "quiz",
-                                "question": "¿Cuál es el objetivo principal de la programación?",
+                                "question": "Si una computadora no entiende una instrucción, ¿qué sucede?",
                                 "options": [
-                                    "Comprar hardware",
-                                    "Resolver problemas",
-                                    "Ver videos"
+                                    "Lo adivina",
+                                    "Lanza un error o se detiene",
+                                    "Sigue adelante"
+                                ],
+                                "answer": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "thinking-logic",
+                        "title": "Pensamiento Computacional",
+                        "content": "Consiste en descomponer un problema grande en otros más pequeños (descomposición), encontrar patrones y diseñar pasos lógicos para resolverlo. Esto es más importante que el lenguaje de programación en sí. Sin lógica, el código es solo un montón de palabras sin sentido.",
+                        "exercises": [
+                            {
+                                "type": "reorder",
+                                "question": "Ordena los pasos para hacer café:",
+                                "options": [
+                                    "Verter agua",
+                                    "Poner café en filtro",
+                                    "Calentar agua",
+                                    "Servir"
+                                ],
+                                "answer": [
+                                    2,
+                                    1,
+                                    0,
+                                    3
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "algorithms",
+                "title": "2. Algoritmos en Detalle",
+                "lessons": [
+                    {
+                        "id": "algo-concepts",
+                        "title": "Características de un Algoritmo",
+                        "content": "Un algoritmo debe ser: 1. Finito (tiene un principio y un fin), 2. Definido (siempre produce el mismo resultado bajo las mismas condiciones) y 3. Preciso (cada paso está claramente especificado). Los algoritmos están en todas partes, desde cómo Google busca información hasta cómo tu microondas calienta la comida.",
+                        "pseudocode": "Algoritmo Suma\n  Escribir 'Dime A'\n  Leer A\n  Escribir 'Dime B'\n  Leer B\n  Resultado = A + B\n  Escribir Resultado\nFinAlgoritmo",
+                        "exercises": [
+                            {
+                                "type": "quiz",
+                                "question": "¿Qué significa que sea 'Finito'?",
+                                "options": [
+                                    "Que nunca termina",
+                                    "Que tiene un número limitado de pasos",
+                                    "Que es muy pequeño"
+                                ],
+                                "answer": 1
+                            }
+                        ]
+                    },
+                    {
+                        "id": "flowcharts",
+                        "title": "Diagramas de Flujo",
+                        "content": "Un diagrama de flujo es la representación visual de un algoritmo. Utiliza símbolos estándar: el óvalo para el Inicio y el Fin, el rombo para tomar decisiones (Sí/No) y el rectángulo para acciones o procesos. Es la mejor herramienta para planear tu código antes de escribir una sola línea.",
+                        "image": "https://upload.wikimedia.org/wikipedia/commons/9/91/Flowchart_en.png",
+                        "exercises": [
+                            {
+                                "type": "quiz",
+                                "question": "¿Qué figura se usa para una decisión (Sí/No)?",
+                                "options": [
+                                    "Rectángulo",
+                                    "Rombo",
+                                    "Círculo"
                                 ],
                                 "answer": 1
                             }
@@ -29,44 +94,34 @@ const coursesData = [
                 ]
             },
             {
-                "id": "algorithms",
-                "title": "2. Algoritmos y Lógica",
+                "id": "variables-const",
+                "title": "3. El mundo de las Variables",
                 "lessons": [
                     {
-                        "id": "algo-def",
-                        "title": "Definición de Algoritmo",
-                        "content": "Un algoritmo es una secuencia finita de pasos bien definidos, ordenados y finitos que permite realizar una actividad o resolver un problema.",
-                        "pseudocode": "Inicio\n  Paso 1: Abrir la puerta\n  Paso 2: Salir\nFin",
-                        "exercises": [
-                            {
-                                "type": "quiz",
-                                "question": "Un algoritmo debe ser...",
-                                "options": [
-                                    "Infinito",
-                                    "Ambiguo",
-                                    "Finito y ordenado"
-                                ],
-                                "answer": 2
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": "variables",
-                "title": "3. Variables y Constantes",
-                "lessons": [
-                    {
-                        "id": "vars",
-                        "title": "Concepto de Variable",
-                        "content": "Una variable es un espacio de memoria con un nombre que almacena un valor que puede cambiar durante la ejecución del programa.",
-                        "code": "let puntuacion = 0;\npuntuacion = 10;",
+                        "id": "variables-concept",
+                        "title": "Cajas de Memoria",
+                        "content": "Imagina una variable como una caja con una etiqueta (su nombre) donde guardas algo (su valor). En programación, usamos variables para recordar datos que necesitaremos más tarde. El valor de una variable puede cambiar (variar) a medida que el programa avanza.",
+                        "code": "let puntuacion = 100;\npuntuacion = 150; // Ahora el valor en la caja es 150",
                         "exercises": [
                             {
                                 "type": "code",
-                                "question": "Declara una variable llamada 'nombre' y asígnale el valor 'Ana'.",
+                                "question": "Crea una variable llamada 'puntos' con el valor inicial de 50.",
                                 "placeholder": "let ...",
-                                "answer": "let nombre = 'Ana';"
+                                "answer": "let puntos = 50;"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "constants",
+                        "title": "Constantes: Lo que no cambia",
+                        "content": "A veces queremos valores que permanezcan fijos durante toda la vida de nuestro programa, como el valor de PI, el nombre de un servidor o la tasa del IVA. Para esto usamos 'const'. Intentar cambiar una constante resultará en un error de ejecución.",
+                        "code": "const PI = 3.1416;\n// PI = 4; // Esto causaría un error",
+                        "exercises": [
+                            {
+                                "type": "code",
+                                "question": "Declara una constante 'IVA' con el valor numérico 21.",
+                                "placeholder": "const ...",
+                                "answer": "const IVA = 21;"
                             }
                         ]
                     }
@@ -77,19 +132,18 @@ const coursesData = [
                 "title": "4. Tipos de Datos",
                 "lessons": [
                     {
-                        "id": "types",
-                        "title": "Tipos Primitivos",
-                        "content": "Los lenguajes tienen tipos básicos: Enteros (int), Decimales (float/double), Cadenas (string) y Booleanos (true/false).",
+                        "id": "primitives",
+                        "title": "Datos Primitivos",
+                        "content": "Los datos pueden ser de diferentes naturalezas. Los más comunes son: 'Strings' (texto entre comillas), 'Numbers' (números con o sin decimales) y 'Booleans' (solo pueden ser true o false). Conocer el tipo de dato es crucial para saber qué operaciones podemos hacer con ellos.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "¿Qué tipo de dato usarías para 'verdadero'?",
-                                "options": [
-                                    "String",
-                                    "Boolean",
-                                    "Integer"
-                                ],
-                                "answer": 1
+                                "type": "match",
+                                "question": "Une el dato con su tipo:",
+                                "pairs": {
+                                    "'Hola'": "String",
+                                    "42": "Number",
+                                    "true": "Boolean"
+                                }
                             }
                         ]
                     }
@@ -97,19 +151,19 @@ const coursesData = [
             },
             {
                 "id": "operators",
-                "title": "5. Operadores y Expresiones",
+                "title": "5. Operadores",
                 "lessons": [
                     {
-                        "id": "ops",
+                        "id": "arithmetic",
                         "title": "Operadores Aritméticos",
-                        "content": "Permiten realizar cálculos: + (suma), - (resta), * (multiplicación), / (división), % (módulo).",
-                        "code": "let total = 5 + 3 * 2; // total es 11",
+                        "content": "Son los símbolos que usamos para hacer cálculos: + para sumar, - para restar, * para multiplicar, / para dividir y % (módulo) para obtener el resto de una división. El módulo es muy útil para saber, por ejemplo, si un número es par o impar.",
+                        "code": "let resto = 10 % 3; // El resto es 1",
                         "exercises": [
                             {
                                 "type": "code",
-                                "question": "Calcula el resto de 10 dividido por 3 usando el operador módulo.",
-                                "placeholder": "let resto = ...",
-                                "answer": "let resto = 10 % 3;"
+                                "question": "Asigna a la variable 'x' el resultado de multiplicar 5 por 4.",
+                                "placeholder": "let x = ...",
+                                "answer": "let x = 5 * 4;"
                             }
                         ]
                     }
@@ -120,18 +174,18 @@ const coursesData = [
                 "title": "6. Estructuras de Control: Condicionales",
                 "lessons": [
                     {
-                        "id": "if-else",
-                        "title": "La sentencia If",
-                        "content": "Permite ejecutar un bloque de código solo si se cumple una condición.",
-                        "code": "if (edad >= 18) {\n  console.log('Eres mayor de edad');\n} else {\n  console.log('Eres menor');\n}",
+                        "id": "if-statement",
+                        "title": "La sentencia If-Else",
+                        "content": "Los condicionales permiten que nuestro programa tome decisiones. Si la condición dentro del paréntesis es verdadera, se ejecuta el primer bloque de código; si es falsa, se ejecuta el bloque dentro del 'else'. Es como decir: 'Si llueve, lleva paraguas, si no, lleva gafas de sol'.",
+                        "code": "if (edad >= 18) {\n  console.log('Puedes pasar');\n} else {\n  console.log('Eres menor');\n}",
                         "exercises": [
                             {
                                 "type": "quiz",
-                                "question": "¿Qué bloque se ejecuta si la condición es falsa?",
+                                "question": "¿Qué pasa si la condición del 'if' no se cumple?",
                                 "options": [
-                                    "if",
-                                    "else",
-                                    "ambos"
+                                    "Se salta el código",
+                                    "Se ejecuta el 'else'",
+                                    "El programa explota"
                                 ],
                                 "answer": 1
                             }
@@ -144,16 +198,20 @@ const coursesData = [
                 "title": "7. Estructuras de Control: Bucles",
                 "lessons": [
                     {
-                        "id": "for-loop",
-                        "title": "Bucle For",
-                        "content": "Se usa cuando conocemos de antemano el número de iteraciones.",
-                        "code": "for (let i = 0; i < 5; i++) {\n  console.log(i);\n}",
+                        "id": "while-loop",
+                        "title": "El Bucle While",
+                        "content": "Un bucle repite un bloque de código mientras se cumpla una condición. El bucle 'while' es ideal cuando no sabemos exactamente cuántas veces necesitamos repetir algo, pero sabemos hasta cuándo.",
+                        "code": "let contador = 0;\nwhile (contador < 3) {\n  console.log('Hola');\n  contador++;\n}",
                         "exercises": [
                             {
-                                "type": "code",
-                                "question": "Escribe un bucle for que se ejecute 3 veces (de i=0 a i<3).",
-                                "placeholder": "for...",
-                                "answer": "for(let i=0; i<3; i++) {}"
+                                "type": "quiz",
+                                "question": "¿Qué pasa si nunca cambiamos la condición dentro de un bucle?",
+                                "options": [
+                                    "Se detiene solo",
+                                    "Se crea un bucle infinito",
+                                    "Va más rápido"
+                                ],
+                                "answer": 1
                             }
                         ]
                     }
@@ -164,16 +222,16 @@ const coursesData = [
                 "title": "8. Funciones",
                 "lessons": [
                     {
-                        "id": "func-def",
-                        "title": "Declaración de Funciones",
-                        "content": "Una función es un bloque de código diseñado para realizar una tarea específica que puede ser reutilizado.",
-                        "code": "function saludar() {\n  return 'Hola';\n}",
+                        "id": "func-intro",
+                        "title": "Funciones y Reutilización",
+                        "content": "Una función es un conjunto de instrucciones agrupadas bajo un nombre que podemos invocar en cualquier momento. Nos ayudan a evitar repetir código y a hacer nuestros programas más legibles y organizados.",
+                        "code": "function saludar(nombre) {\n  return 'Hola ' + nombre;\n}\nsaludar('Ana');",
                         "exercises": [
                             {
                                 "type": "code",
-                                "question": "Crea una función llamada 'test' que no reciba parámetros.",
+                                "question": "Crea una función llamada 'miApp' que no haga nada (bloque vacío).",
                                 "placeholder": "function ...",
-                                "answer": "function test() {}"
+                                "answer": "function miApp() {}"
                             }
                         ]
                     }
@@ -184,18 +242,18 @@ const coursesData = [
                 "title": "9. Arreglos y Listas",
                 "lessons": [
                     {
-                        "id": "array-intro",
-                        "title": "Introducción a Arreglos",
-                        "content": "Un arreglo es una estructura que permite almacenar múltiples valores en una sola variable.",
-                        "code": "let frutas = ['manzana', 'pera'];",
+                        "id": "array-basics",
+                        "title": "Colecciones de Datos",
+                        "content": "Un arreglo (array) es una lista ordenada de valores. En lugar de tener una variable para cada fruta, podemos tener un solo arreglo 'frutas'. Recuerda que en programación empezamos a contar desde 0.",
+                        "code": "let frutas = ['Manzana', 'Pera', 'Plátano'];\nconsole.log(frutas[0]); // Muestra Manzana",
                         "exercises": [
                             {
                                 "type": "quiz",
-                                "question": "¿Cuál es el índice del primer elemento en la mayoría de lenguajes?",
+                                "question": "¿Cuál es el índice del primer elemento de un array?",
                                 "options": [
                                     "1",
                                     "0",
-                                    "-1"
+                                    "A"
                                 ],
                                 "answer": 1
                             }
@@ -204,62 +262,26 @@ const coursesData = [
                 ]
             },
             {
-                "id": "debugging",
-                "title": "10. Debugging",
+                "id": "objects",
+                "title": "10. Objetos",
                 "lessons": [
                     {
-                        "id": "debug-def",
-                        "title": "¿Qué es el Debugging?",
-                        "content": "Es el proceso de encontrar y corregir errores (bugs) en el código.",
+                        "id": "obj-intro",
+                        "title": "Modelando la Realidad",
+                        "content": "Los objetos nos permiten agrupar datos y comportamientos relacionados. Un objeto 'Coche' puede tener propiedades como 'color', 'marca' y 'modelo'. Es la base de la Programación Orientada a Objetos.",
+                        "code": "let coche = {\n  marca: 'Toyota',\n  color: 'Rojo'\n};",
                         "exercises": [
                             {
                                 "type": "quiz",
-                                "question": "A un error en el código se le conoce como:",
+                                "question": "¿Cómo se llaman las características de un objeto?",
                                 "options": [
-                                    "Feature",
-                                    "Bug",
-                                    "Script"
+                                    "Funciones",
+                                    "Propiedades",
+                                    "Arrays"
                                 ],
                                 "answer": 1
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "id": "poo-adv",
-                "title": "Programación Orientada a Objetos",
-                "lessons": [
-                    {
-                        "id": "encapsulation",
-                        "title": "Encapsulamiento",
-                        "content": "Ocultar los detalles internos de un objeto."
-                    },
-                    {
-                        "id": "inheritance",
-                        "title": "Herencia",
-                        "content": "Una clase hereda propiedades de otra."
-                    },
-                    {
-                        "id": "polymorphism",
-                        "title": "Polimorfismo",
-                        "content": "Diferentes clases pueden ser tratadas como instancias de una misma clase a través de interfaces."
-                    }
-                ]
-            },
-            {
-                "id": "data-struct",
-                "title": "Estructuras de Datos",
-                "lessons": [
-                    {
-                        "id": "stacks-queues",
-                        "title": "Pilas y Colas",
-                        "content": "LIFO y FIFO."
-                    },
-                    {
-                        "id": "linked-lists",
-                        "title": "Listas Enlazadas",
-                        "content": "Nodos que apuntan al siguiente."
                     }
                 ]
             }
@@ -273,22 +295,39 @@ const coursesData = [
         "topics": [
             {
                 "id": "eng-class-1",
-                "title": "Class 1: Greetings & Introductions",
+                "title": "Clase 1: Greetings",
                 "lessons": [
                     {
-                        "id": "eng-lesson-1",
-                        "title": "Explanation",
-                        "content": "Learning about Greetings & Introductions. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-1-1",
+                        "title": "Vocabulary: Greetings",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Greetings. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Greetings & Introductions important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Greetings con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-1-2",
+                        "title": "Grammar: Using Greetings",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Greetings. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -296,22 +335,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-2",
-                "title": "Class 2: Numbers & Time",
+                "title": "Clase 2: Colors",
                 "lessons": [
                     {
-                        "id": "eng-lesson-2",
-                        "title": "Explanation",
-                        "content": "Learning about Numbers & Time. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-2-1",
+                        "title": "Vocabulary: Colors",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Colors. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Numbers & Time important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Colors con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-2-2",
+                        "title": "Grammar: Using Colors",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Colors. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -319,22 +375,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-3",
-                "title": "Class 3: Personal Information",
+                "title": "Clase 3: Family",
                 "lessons": [
                     {
-                        "id": "eng-lesson-3",
-                        "title": "Explanation",
-                        "content": "Learning about Personal Information. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-3-1",
+                        "title": "Vocabulary: Family",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Family. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Personal Information important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Family con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-3-2",
+                        "title": "Grammar: Using Family",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Family. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -342,22 +415,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-4",
-                "title": "Class 4: My Family",
+                "title": "Clase 4: Numbers",
                 "lessons": [
                     {
-                        "id": "eng-lesson-4",
-                        "title": "Explanation",
-                        "content": "Learning about My Family. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-4-1",
+                        "title": "Vocabulary: Numbers",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Numbers. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is My Family important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Numbers con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-4-2",
+                        "title": "Grammar: Using Numbers",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Numbers. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -365,22 +455,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-5",
-                "title": "Class 5: Colors & Clothing",
+                "title": "Clase 5: Time",
                 "lessons": [
                     {
-                        "id": "eng-lesson-5",
-                        "title": "Explanation",
-                        "content": "Learning about Colors & Clothing. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-5-1",
+                        "title": "Vocabulary: Time",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Time. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Colors & Clothing important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Time con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-5-2",
+                        "title": "Grammar: Using Time",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Time. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -388,22 +495,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-6",
-                "title": "Class 6: The Home",
+                "title": "Clase 6: Daily Routine",
                 "lessons": [
                     {
-                        "id": "eng-lesson-6",
-                        "title": "Explanation",
-                        "content": "Learning about The Home. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-6-1",
+                        "title": "Vocabulary: Daily Routine",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Daily Routine. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is The Home important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Daily Routine con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-6-2",
+                        "title": "Grammar: Using Daily Routine",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Daily Routine. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -411,22 +535,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-7",
-                "title": "Class 7: Food & Drink",
+                "title": "Clase 7: Food",
                 "lessons": [
                     {
-                        "id": "eng-lesson-7",
-                        "title": "Explanation",
-                        "content": "Learning about Food & Drink. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-7-1",
+                        "title": "Vocabulary: Food",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Food. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Food & Drink important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Food con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-7-2",
+                        "title": "Grammar: Using Food",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Food. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -434,22 +575,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-8",
-                "title": "Class 8: Daily Routine",
+                "title": "Clase 8: Hobbies",
                 "lessons": [
                     {
-                        "id": "eng-lesson-8",
-                        "title": "Explanation",
-                        "content": "Learning about Daily Routine. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-8-1",
+                        "title": "Vocabulary: Hobbies",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Hobbies. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Daily Routine important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Hobbies con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-8-2",
+                        "title": "Grammar: Using Hobbies",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Hobbies. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -457,22 +615,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-9",
-                "title": "Class 9: Hobbies & Sports",
+                "title": "Clase 9: Animals",
                 "lessons": [
                     {
-                        "id": "eng-lesson-9",
-                        "title": "Explanation",
-                        "content": "Learning about Hobbies & Sports. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-9-1",
+                        "title": "Vocabulary: Animals",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Animals. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Hobbies & Sports important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Animals con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-9-2",
+                        "title": "Grammar: Using Animals",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Animals. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -480,22 +655,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-10",
-                "title": "Class 10: Jobs & Occupations",
+                "title": "Clase 10: Weather",
                 "lessons": [
                     {
-                        "id": "eng-lesson-10",
-                        "title": "Explanation",
-                        "content": "Learning about Jobs & Occupations. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-10-1",
+                        "title": "Vocabulary: Weather",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Weather. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Jobs & Occupations important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Weather con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-10-2",
+                        "title": "Grammar: Using Weather",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Weather. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -503,22 +695,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-11",
-                "title": "Class 11: Places in Town",
+                "title": "Clase 11: Clothes",
                 "lessons": [
                     {
-                        "id": "eng-lesson-11",
-                        "title": "Explanation",
-                        "content": "Learning about Places in Town. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-11-1",
+                        "title": "Vocabulary: Clothes",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Clothes. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Places in Town important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Clothes con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-11-2",
+                        "title": "Grammar: Using Clothes",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Clothes. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -526,22 +735,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-12",
-                "title": "Class 12: Giving Directions",
+                "title": "Clase 12: House",
                 "lessons": [
                     {
-                        "id": "eng-lesson-12",
-                        "title": "Explanation",
-                        "content": "Learning about Giving Directions. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-12-1",
+                        "title": "Vocabulary: House",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre House. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Giving Directions important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de House con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-12-2",
+                        "title": "Grammar: Using House",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de House. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -549,22 +775,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-13",
-                "title": "Class 13: Health & Body",
+                "title": "Clase 13: City",
                 "lessons": [
                     {
-                        "id": "eng-lesson-13",
-                        "title": "Explanation",
-                        "content": "Learning about Health & Body. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-13-1",
+                        "title": "Vocabulary: City",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre City. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Health & Body important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de City con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-13-2",
+                        "title": "Grammar: Using City",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de City. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -572,22 +815,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-14",
-                "title": "Class 14: Weather & Seasons",
+                "title": "Clase 14: Transport",
                 "lessons": [
                     {
-                        "id": "eng-lesson-14",
-                        "title": "Explanation",
-                        "content": "Learning about Weather & Seasons. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-14-1",
+                        "title": "Vocabulary: Transport",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Transport. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Weather & Seasons important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Transport con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-14-2",
+                        "title": "Grammar: Using Transport",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Transport. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -595,22 +855,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-15",
-                "title": "Class 15: Travel & Holidays",
+                "title": "Clase 15: Health",
                 "lessons": [
                     {
-                        "id": "eng-lesson-15",
-                        "title": "Explanation",
-                        "content": "Learning about Travel & Holidays. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-15-1",
+                        "title": "Vocabulary: Health",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Health. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Travel & Holidays important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Health con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-15-2",
+                        "title": "Grammar: Using Health",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Health. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -618,22 +895,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-16",
-                "title": "Class 16: Shopping",
+                "title": "Clase 16: Work",
                 "lessons": [
                     {
-                        "id": "eng-lesson-16",
-                        "title": "Explanation",
-                        "content": "Learning about Shopping. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-16-1",
+                        "title": "Vocabulary: Work",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Work. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Shopping important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Work con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-16-2",
+                        "title": "Grammar: Using Work",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Work. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -641,22 +935,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-17",
-                "title": "Class 17: Past Events",
+                "title": "Clase 17: Past",
                 "lessons": [
                     {
-                        "id": "eng-lesson-17",
-                        "title": "Explanation",
-                        "content": "Learning about Past Events. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-17-1",
+                        "title": "Vocabulary: Past",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Past. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Past Events important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Past con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-17-2",
+                        "title": "Grammar: Using Past",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Past. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -664,22 +975,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-18",
-                "title": "Class 18: Future Plans",
+                "title": "Clase 18: Future",
                 "lessons": [
                     {
-                        "id": "eng-lesson-18",
-                        "title": "Explanation",
-                        "content": "Learning about Future Plans. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-18-1",
+                        "title": "Vocabulary: Future",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Future. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Future Plans important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Future con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-18-2",
+                        "title": "Grammar: Using Future",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Future. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -687,22 +1015,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-19",
-                "title": "Class 19: Comparatives",
+                "title": "Clase 19: Conditionals",
                 "lessons": [
                     {
-                        "id": "eng-lesson-19",
-                        "title": "Explanation",
-                        "content": "Learning about Comparatives. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-19-1",
+                        "title": "Vocabulary: Conditionals",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Conditionals. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Comparatives important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Conditionals con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-19-2",
+                        "title": "Grammar: Using Conditionals",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Conditionals. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -710,22 +1055,39 @@ const coursesData = [
             },
             {
                 "id": "eng-class-20",
-                "title": "Class 20: Course Review",
+                "title": "Clase 20: Final Review",
                 "lessons": [
                     {
-                        "id": "eng-lesson-20",
-                        "title": "Explanation",
-                        "content": "Learning about Course Review. This lesson covers the vocabulary and grammar necessary to master this topic.",
+                        "id": "eng-lesson-20-1",
+                        "title": "Vocabulary: Final Review",
+                        "content": "En esta clase aprenderemos el vocabulario esencial para hablar sobre Final Review. La pronunciación es fundamental, así que intenta decir las palabras en voz alta mientras las lees.",
                         "exercises": [
                             {
-                                "type": "quiz",
-                                "question": "Is Course Review important?",
-                                "options": [
-                                    "No",
-                                    "Yes",
-                                    "Maybe"
+                                "type": "match",
+                                "question": "Une las palabras de Final Review con su traducción:",
+                                "pairs": {
+                                    "Hello": "Hola",
+                                    "Apple": "Manzana",
+                                    "Dog": "Perro"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "eng-lesson-20-2",
+                        "title": "Grammar: Using Final Review",
+                        "content": "Ahora que conoces las palabras, vamos a ver cómo construir frases reales usando el tema de Final Review. Presta atención al orden de las palabras.",
+                        "exercises": [
+                            {
+                                "type": "sentence",
+                                "question": "Traduce la frase: 'Hello, how are you?'",
+                                "words": [
+                                    "Hello,",
+                                    "how",
+                                    "are",
+                                    "you?"
                                 ],
-                                "answer": 1
+                                "answer": "Hello, how are you?"
                             }
                         ]
                     }
@@ -741,35 +1103,66 @@ const coursesData = [
         "topics": [
             {
                 "id": "db-intro",
-                "title": "Introducción a DB",
+                "title": "1. Introducción a Bases de Datos",
                 "lessons": [
                     {
-                        "id": "db-what",
-                        "title": "¿Qué es una BD?",
-                        "content": "Almacén de datos estructurados."
+                        "id": "db-history",
+                        "title": "Historia y Necesidad",
+                        "content": "Una Base de Datos es un sistema diseñado para almacenar y gestionar grandes volúmenes de información de forma organizada. A diferencia de un simple archivo de texto, una BD nos permite buscar, filtrar y relacionar datos en milisegundos. Es el cerebro de cualquier aplicación moderna como Facebook, Amazon o Netflix.",
+                        "exercises": [
+                            {
+                                "type": "quiz",
+                                "question": "¿Por qué usamos BD en lugar de archivos normales?",
+                                "options": [
+                                    "Porque son gratis",
+                                    "Por integridad, seguridad y velocidad",
+                                    "Porque son más fáciles de escribir"
+                                ],
+                                "answer": 1
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "id": "normalization",
-                "title": "Normalización",
+                "id": "db-er",
+                "title": "2. Modelo Entidad Relación (E-R)",
                 "lessons": [
                     {
-                        "id": "norm-1",
-                        "title": "1NF, 2NF, 3NF",
-                        "content": "Proceso para evitar redundancia."
+                        "id": "er-elements",
+                        "title": "Entidades, Atributos y Relaciones",
+                        "content": "Para diseñar una base de datos, primero creamos un mapa conceptual. Una 'Entidad' es un objeto (Usuario, Producto). Un 'Atributo' es una característica (Nombre, Precio). Una 'Relación' es cómo se conectan (Un Usuario 'Compra' un Producto).",
+                        "exercises": [
+                            {
+                                "type": "match",
+                                "question": "Relaciona los conceptos del modelo E-R:",
+                                "pairs": {
+                                    "Usuario": "Entidad",
+                                    "Email": "Atributo",
+                                    "Tiene": "Relación"
+                                }
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "id": "sql-adv",
-                "title": "SQL Avanzado",
+                "id": "sql-basics",
+                "title": "3. SQL: El Lenguaje de las BD",
                 "lessons": [
                     {
-                        "id": "joins",
-                        "title": "Joins",
-                        "content": "Combinar tablas.",
-                        "code": "SELECT * FROM A INNER JOIN B ON A.id = B.id"
+                        "id": "select-from",
+                        "title": "SELECT y FROM",
+                        "content": "SQL (Structured Query Language) es el idioma universal para hablar con las bases de datos relacionales. Con SELECT elegimos qué columnas queremos ver y con FROM indicamos de qué tabla provienen los datos.",
+                        "code": "SELECT nombre, email FROM usuarios;",
+                        "exercises": [
+                            {
+                                "type": "code",
+                                "question": "Escribe la consulta para traer todas las columnas (*) de la tabla llamada 'productos'.",
+                                "placeholder": "...",
+                                "answer": "SELECT * FROM productos;"
+                            }
+                        ]
                     }
                 ]
             }

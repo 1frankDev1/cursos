@@ -1,263 +1,221 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const mainContent = document.getElementById('main-content');
-    const pageTitle = document.getElementById('page-title');
-    const backButton = document.getElementById('back-button');
-    const navItems = document.querySelectorAll('.nav-item');
+    const courseApp = document.getElementById('course-app');
+    if (!courseApp) return;
 
-    let currentState = {
-        view: 'home',
-        courseId: null,
-        topicId: null,
-        lessonId: null
+    const filename = window.location.pathname.split('/').pop() || 'index.html';
+    const courseIdMap = {
+        'programming.html': 'programming',
+        'english.html': 'english',
+        'database.html': 'databases'
     };
+    const courseId = courseIdMap[filename];
+    const course = coursesData.find(c => c.id === courseId);
 
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const view = item.getAttribute('data-view');
-            if (view === 'profile') return;
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-            navigateTo({ view, courseId: null, topicId: null, lessonId: null });
+    if (!course) return;
+
+    let currentTopicIndex = 0;
+    let currentLessonIndex = 0;
+
+    function init() {
+        renderLayout();
+        handleRouting();
+        window.addEventListener('popstate', handleRouting);
+    }
+
+    function renderLayout() {
+        courseApp.innerHTML = `
+            <div class="course-layout">
+                <aside class="sidebar-syllabus">
+                    <div class="sidebar-header">
+                        <h3 class="section-title">${course.title}</h3>
+                        <p style="font-size: 12px; color: var(--text-muted);">${course.topics.length} Módulos</p>
+                    </div>
+                    <div id="syllabus-list"></div>
+                </aside>
+                <section class="lesson-workspace" id="lesson-workspace">
+                    <div id="lesson-container"></div>
+                </section>
+            </div>
+        `;
+    }
+
+    function handleRouting() {
+        const params = new URLSearchParams(window.location.search);
+        const lessonId = params.get('lesson');
+
+        if (lessonId) {
+            let found = false;
+            course.topics.forEach((topic, tIdx) => {
+                const lIdx = topic.lessons.findIndex(l => l.id === lessonId);
+                if (lIdx !== -1) {
+                    currentTopicIndex = tIdx;
+                    currentLessonIndex = lIdx;
+                    found = true;
+                }
+            });
+            if (!found) { currentTopicIndex = 0; currentLessonIndex = 0; }
+        } else {
+            currentTopicIndex = 0;
+            currentLessonIndex = 0;
+        }
+
+        const lesson = course.topics[currentTopicIndex].lessons[currentLessonIndex];
+        renderSyllabus();
+        renderLesson(lesson);
+        window.scrollTo(0, 0);
+    }
+
+    function renderSyllabus() {
+        const list = document.getElementById('syllabus-list');
+        list.innerHTML = '';
+        course.topics.forEach((topic, tIdx) => {
+            const topicEl = document.createElement('div');
+            topicEl.className = 'topic-group';
+            topicEl.innerHTML = `<div class="topic-label">${topic.title}</div>`;
+
+            topic.lessons.forEach((lesson, lIdx) => {
+                const isActive = currentTopicIndex === tIdx && currentLessonIndex === lIdx;
+                const item = document.createElement('div');
+                item.className = `syllabus-item ${isActive ? 'active' : ''}`;
+                item.innerHTML = `
+                    <span class="material-icons" style="font-size: 18px;">${lesson.exercises?.length ? 'auto_awesome' : 'menu_book'}</span>
+                    <h4>${lesson.title}</h4>
+                `;
+                item.onclick = () => {
+                    const url = new URL(window.location);
+                    url.searchParams.set('lesson', lesson.id);
+                    window.history.pushState({}, '', url);
+                    handleRouting();
+                };
+                topicEl.appendChild(item);
+            });
+            list.appendChild(topicEl);
         });
-    });
-
-    backButton.addEventListener('click', () => {
-        window.history.back();
-    });
-
-    function navigateTo(state, pushState = true) {
-        currentState = { ...currentState, ...state };
-        if (pushState) {
-            window.history.pushState(currentState, '', '');
-        }
-        render();
     }
 
-    window.addEventListener('popstate', (event) => {
-        if (event.state) {
-            currentState = event.state;
-            render();
-        }
-    });
+    function renderLesson(lesson) {
+        const container = document.getElementById('lesson-container');
+        container.innerHTML = `
+            <div class="lesson-body fade-in">
+                <div class="lesson-header">
+                    <span class="badge">${course.topics[currentTopicIndex].title}</span>
+                    <h2>${lesson.title}</h2>
+                </div>
+                <div class="content-text">${simpleMarkdown(lesson.content)}</div>
 
-    function simpleMarkdown(text) {
-        if (!text) return '';
-        return text
-            .replace(/^### (.*$)/gim, '<h3 style="margin: 15px 0 10px; color: var(--p);">$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2 style="margin: 20px 0 10px; color: var(--p);">$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1 style="margin: 25px 0 15px; color: var(--p);">$1</h1>')
-            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-            .replace(/^\* (.*$)/gim, '<li style="margin-left: 20px;">$1</li>')
-            .replace(/\n/g, '<br>');
-    }
-
-    function render() {
-        const { view, courseId, topicId, lessonId } = currentState;
-        mainContent.innerHTML = '';
-        backButton.classList.add('hidden');
-        mainContent.scrollTop = 0;
-
-        if (view === 'home') renderHome();
-        else if (view === 'courses') renderCourses();
-        else if (view === 'course-details') renderCourseDetails(courseId);
-        else if (view === 'topic') renderTopic(courseId, topicId);
-        else if (view === 'lesson') renderLesson(courseId, topicId, lessonId);
-    }
-
-    function renderHome() {
-        pageTitle.innerText = 'EduApp';
-        mainContent.innerHTML = `
-            <div class="welcome-card">
-                <h2>¡Bienvenido! 🚀</h2>
-                <p>Domina Programación, Inglés y Bases de Datos con lecciones interactivas.</p>
-            </div>
-            <div class="section-title">Tu progreso</div>
-            <div class="course-grid">
-                ${coursesData.map(course => `
-                    <div class="course-card" onclick="app.viewCourse('${course.id}')">
-                        <span class="material-icons" style="color: ${course.color}">${course.icon}</span>
-                        <h3>${course.title}</h3>
-                        <p>${course.topics.length} temas</p>
+                ${lesson.exercises?.length ? `
+                    <div class="interactive-pane">
+                        <div class="pane-header">
+                            <span class="material-icons">psychology</span>
+                            <h3>Práctica y Refuerzo</h3>
+                        </div>
+                        ${lesson.exercises.map((ex, i) => renderExercise(ex, i)).join('')}
                     </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    function renderCourses() {
-        pageTitle.innerText = 'Explorar';
-        mainContent.innerHTML = `
-            <div class="course-list">
-                ${coursesData.map(course => `
-                    <div class="list-item" onclick="app.viewCourse('${course.id}')">
-                        <div class="icon-circle" style="background: ${course.color}">
-                            <span class="material-icons">${course.icon}</span>
-                        </div>
-                        <div class="list-item-info">
-                            <h4>${course.title}</h4>
-                            <p>Curso profesional completo</p>
-                        </div>
-                        <span class="material-icons" style="color: #ccc">chevron_right</span>
+                ` : `
+                    <div class="next-step-box">
+                        <p>¿Listo para continuar?</p>
+                        <button class="run-btn" onclick="app.nextLesson()">Siguiente Lección</button>
                     </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    function renderCourseDetails(courseId) {
-        const course = coursesData.find(c => c.id === courseId);
-        pageTitle.innerText = course.title;
-        backButton.classList.remove('hidden');
-
-        mainContent.innerHTML = `
-            <div class="section-title">Contenido del Curso</div>
-            <div class="topic-list">
-                ${course.topics.map((topic, index) => `
-                    <div class="list-item" onclick="app.viewTopic('${courseId}', '${topic.id}')">
-                        <div class="icon-circle" style="background: ${course.color}22; color: ${course.color}">
-                            ${index + 1}
-                        </div>
-                        <div class="list-item-info">
-                            <h4>${topic.title}</h4>
-                            <p>${topic.lessons.length} lecciones</p>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    function renderTopic(courseId, topicId) {
-        const course = coursesData.find(c => c.id === courseId);
-        const topic = course.topics.find(t => t.id === topicId);
-        pageTitle.innerText = 'Lecciones';
-        backButton.classList.remove('hidden');
-
-        mainContent.innerHTML = `
-            <div class="topic-header" style="background: ${course.color}; color: white; padding: 20px; border-radius: 0 0 20px 20px; margin: -20px -20px 20px;">
-                <h2>${topic.title}</h2>
-            </div>
-            <div class="lesson-list">
-                ${topic.lessons.map(lesson => `
-                    <div class="list-item" onclick="app.viewLesson('${courseId}', '${topicId}', '${lesson.id}')">
-                        <div class="icon-circle" style="background: #fff; color: ${course.color}; border: 1px solid #eee">
-                            <span class="material-icons">menu_book</span>
-                        </div>
-                        <div class="list-item-info">
-                            <h4>${lesson.title}</h4>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-
-    function renderLesson(courseId, topicId, lessonId) {
-        const course = coursesData.find(c => c.id === courseId);
-        const topic = course.topics.find(t => t.id === topicId);
-        const lesson = topic.lessons.find(l => l.id === lessonId);
-        pageTitle.innerText = 'Aprender';
-        backButton.classList.remove('hidden');
-
-        let html = `
-            <div class="lesson-immersive">
-                <div class="progress-bar-container"><div class="progress-bar" style="width: 100%; background: ${course.color}"></div></div>
-                <h2 class="lesson-title">${lesson.title}</h2>
-                <div class="lesson-body">
-                    <div class="main-content-text" style="font-size: 16px; line-height: 1.6; color: #333;">
-                        ${simpleMarkdown(lesson.content)}
-                    </div>
-        `;
-
-        if (lesson.details) {
-            html += `<div class="lesson-details" style="margin: 20px 0; background: #f9f9f9; padding: 15px; border-radius: 12px; border-left: 4px solid ${course.color};">
-                ${simpleMarkdown(lesson.details)}
-            </div>`;
-        }
-
-        if (lesson.image) {
-            html += `<div class="lesson-media" style="margin: 20px 0;"><img src="${lesson.image}" alt="visual aid" style="width: 100%; border-radius: 15px;"></div>`;
-        }
-
-        if (lesson.pseudocode) {
-            html += `<div class="editor-label">Pseudocódigo</div>${renderCode(lesson.pseudocode, 'python')}`;
-        }
-
-        if (lesson.code) {
-            html += `<div class="editor-label">Código Real</div>${renderCode(lesson.code, 'javascript')}`;
-        }
-
-        if (lesson.exercises) {
-            html += `<div class="divider" style="height: 1px; background: #ddd; margin: 40px 0 20px;"></div><div class="section-title">¡Desafío!</div>`;
-            lesson.exercises.forEach((ex, i) => html += renderExercise(ex, i));
-        }
-
-        html += `</div></div>`;
-        mainContent.innerHTML = html;
-    }
-
-    function renderCode(code, lang) {
-        return `
-            <div class="modern-editor" style="background: #1e1e1e; border-radius: 12px; overflow: hidden; margin-bottom: 20px;">
-                <div class="editor-top" style="background: #333; padding: 5px 15px; color: #aaa; font-family: monospace; font-size: 12px;"><span>index.${lang === 'python' ? 'txt' : 'js'}</span></div>
-                <div class="editor-content" style="padding: 15px; color: #d4d4d4; font-family: 'Fira Code', monospace; font-size: 14px; overflow-x: auto;"><pre><code>${code}</code></pre></div>
+                `}
             </div>
         `;
     }
 
     function renderExercise(ex, idx) {
-        let interaction = '';
-        if (ex.type === 'quiz') {
-            interaction = `
-                <div class="quiz-grid" style="display: grid; gap: 10px;">
-                    ${ex.options.map((opt, i) => `
-                        <button class="game-btn" onclick="app.checkQuiz(${idx}, ${i}, ${ex.answer})">${opt}</button>
-                    `).join('')}
-                </div>
-            `;
-        } else if (ex.type === 'code') {
-            interaction = `
-                <div class="code-game">
-                    <textarea class="game-input" id="code-${idx}" style="width: 100%; min-height: 100px; padding: 15px; background: #000; color: #38bdf8; border: none; border-radius: 12px; font-family: monospace; margin-bottom: 10px;" placeholder="${ex.placeholder || 'Escribe tu respuesta aquí...'}"></textarea>
-                    <button class="submit-btn" style="width: 100%; padding: 15px; background: var(--p); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;" onclick="app.checkCode(${idx}, '${ex.answer}')">Validar Solución</button>
+        if (ex.type === 'code') {
+            return `
+                <div class="exercise-card" id="ex-${idx}">
+                    <p class="question">${ex.question}</p>
+                    <div class="ide-box">
+                        <div class="ide-head">editor_v1.js</div>
+                        <div class="ide-body">
+                            <textarea class="ide-input" id="ide-${idx}" placeholder="Escribe tu código aquí..."></textarea>
+                        </div>
+                    </div>
+                    <div class="exercise-actions">
+                        <button class="run-btn" onclick="app.checkCode(${idx}, '${ex.answer}')">EJECUTAR Y VALIDAR</button>
+                        <div class="feedback-msg hidden" id="fb-${idx}"></div>
+                    </div>
                 </div>
             `;
         }
+        if (ex.type === 'quiz') {
+            return `
+                <div class="exercise-card" id="ex-${idx}">
+                    <p class="question">${ex.question}</p>
+                    <div class="quiz-grid">
+                        ${ex.options.map((opt, i) => `
+                            <button class="quiz-option" onclick="app.checkQuiz(${idx}, ${i}, ${ex.answer})">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div class="feedback-msg hidden" id="fb-${idx}"></div>
+                </div>
+            `;
+        }
+    }
 
-        return `
-            <div class="exercise-box" id="ex-${idx}" style="background: #f0f0f0; padding: 20px; border-radius: 20px; margin-bottom: 20px;">
-                <p class="question" style="font-weight: bold; margin-bottom: 15px;">${ex.question}</p>
-                ${interaction}
-                <div class="feedback-msg hidden" style="margin-top: 15px; padding: 10px; border-radius: 8px; text-align: center; font-weight: bold;"></div>
-            </div>
-        `;
+    function simpleMarkdown(text) {
+        if (!text) return '';
+        return text
+            .replace(/^### (.*$)/gim, '<h3 class="md-h3">$1</h3>')
+            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+            .replace(/^\* (.*$)/gim, '<li class="md-li">$1</li>')
+            .replace(/```([\s\S]*?)```/gim, '<pre class="md-code"><code>$1</code></pre>')
+            .replace(/\n/g, '<br>');
     }
 
     window.app = {
-        viewCourse: (id) => navigateTo({ view: 'course-details', courseId: id }),
-        viewTopic: (cid, tid) => navigateTo({ view: 'topic', courseId: cid, topicId: tid }),
-        viewLesson: (cid, tid, lid) => navigateTo({ view: 'lesson', courseId: cid, topicId: tid, lessonId: lid }),
-
-        showFeedback: (idx, success, msg) => {
-            const fb = document.querySelector(`#ex-${idx} .feedback-msg`);
-            fb.innerText = msg;
-            fb.className = `feedback-msg ${success ? 'success' : 'error'}`;
-            fb.style.display = 'block';
-            fb.style.background = success ? '#d4edda' : '#f8d7da';
-            fb.style.color = success ? '#155724' : '#721c24';
-        },
-
-        checkQuiz: (idx, sel, ans) => {
-            const ok = sel === ans;
-            app.showFeedback(idx, ok, ok ? '✨ ¡Correcto! Buen trabajo.' : '❌ Respuesta incorrecta.');
-        },
-
         checkCode: (idx, ans) => {
-            const val = document.getElementById(`code-${idx}`).value.toLowerCase();
-            const ok = val.includes(ans.toLowerCase()) || val.length > 5;
-            app.showFeedback(idx, ok, ok ? '🚀 ¡Increíble! Lo lograste.' : '⚠️ Revisa tu código.');
+            const val = document.getElementById(`ide-${idx}`).value.trim().toLowerCase();
+            const fb = document.getElementById(`fb-${idx}`);
+            fb.classList.remove('hidden', 'success', 'error');
+
+            // Basic fuzzy matching for educational purposes
+            if (val.includes(ans.toLowerCase()) || (val.length > 3 && ans === 'ok')) {
+                fb.innerHTML = '<span class="material-icons">check_circle</span> ¡Excelente trabajo! Código validado.';
+                fb.classList.add('success');
+            } else {
+                fb.innerHTML = '<span class="material-icons">error</span> La respuesta no coincide. ¡Inténtalo de nuevo!';
+                fb.classList.add('error');
+            }
+        },
+        checkQuiz: (idx, sel, ans) => {
+            const fb = document.getElementById(`fb-${idx}`);
+            const options = document.querySelectorAll(`#ex-${idx} .quiz-option`);
+            fb.classList.remove('hidden', 'success', 'error');
+
+            options.forEach(opt => opt.classList.remove('selected-wrong', 'selected-right'));
+
+            if (sel === ans) {
+                fb.innerHTML = '<span class="material-icons">stars</span> ¡Correcto! Has comprendido el concepto.';
+                fb.classList.add('success');
+                options[sel].classList.add('selected-right');
+            } else {
+                fb.innerHTML = '<span class="material-icons">close</span> Respuesta incorrecta. Revisa el contenido arriba.';
+                fb.classList.add('error');
+                options[sel].classList.add('selected-wrong');
+            }
+        },
+        nextLesson: () => {
+            let nextT = currentTopicIndex;
+            let nextL = currentLessonIndex + 1;
+
+            if (nextL >= course.topics[nextT].lessons.length) {
+                nextT++;
+                nextL = 0;
+            }
+
+            if (nextT < course.topics.length) {
+                const nextLesson = course.topics[nextT].lessons[nextL];
+                const url = new URL(window.location);
+                url.searchParams.set('lesson', nextLesson.id);
+                window.history.pushState({}, '', url);
+                handleRouting();
+            } else {
+                alert("¡Felicidades! Has completado el curso.");
+            }
         }
     };
 
-    render();
+    init();
 });

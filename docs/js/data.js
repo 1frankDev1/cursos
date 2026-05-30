@@ -6,551 +6,97 @@ const coursesData = [
         "color": "#4CAF50",
         "topics": [
             {
-                "id": "prog-fund",
+                "id": "fund",
                 "title": "Fundamentos de Programación",
                 "lessons": [
-                    {
-                        "id": "p-l1",
-                        "title": "Intro",
-                        "content": "Variables y tipos.",
-                        "exercises": []
-                    }
+                    { "id": "f1", "title": "1. Introducción y Variables", "content": "Las variables son el primer paso. Permiten guardar información con un nombre.\n\n### Ejemplo:\n`let nombre = 'Juan';`", "exercises": [{ "type": "code", "question": "Crea una variable 'puntos' con valor 100.", "answer": "puntos = 100" }] },
+                    { "id": "f2", "title": "2. Tipos de Datos", "content": "Existen números, textos (strings) y valores lógicos (booleanos).\n\n### Tipos:\n* Strings: \"Hola\"\n* Numbers: 42\n* Booleans: true/false", "exercises": [{ "type": "quiz", "question": "¿Qué tipo de dato es 3.14?", "options": ["String", "Number", "Boolean"], "answer": 1 }] },
+                    { "id": "f3", "title": "3. Operadores Aritméticos", "content": "Suma (+), Resta (-), Multiplicación (*) y División (/).", "exercises": [{ "type": "code", "question": "Calcula 10 multiplicado por 5.", "answer": "10 * 5" }] },
+                    { "id": "f4", "title": "4. Condicionales Simple (If)", "content": "Permite ejecutar código solo si se cumple una condición.\n\n`if (puntos > 50) { ... }`", "exercises": [{ "type": "code", "question": "Escribe un IF que verifique si 'edad' es mayor a 18.", "answer": "if (edad > 18)" }] },
+                    { "id": "f5", "title": "5. Estructura Else", "content": "Qué hacer si la condición NO se cumple.\n\n`else { ... }`", "exercises": [{ "type": "quiz", "question": "¿Cuándo se ejecuta el bloque ELSE?", "options": ["Si el IF es true", "Si el IF es false", "Siempre"], "answer": 1 }] },
+                    { "id": "f6", "title": "6. Bucles: For", "content": "Repetir código un número determinado de veces.\n\n`for (let i=0; i<5; i++) { ... }`", "exercises": [{ "type": "code", "question": "Escribe el inicio de un bucle FOR que use 'i' hasta 10.", "answer": "for (let i = 0; i < 10; i++)" }] },
+                    { "id": "f7", "title": "7. Bucles: While", "content": "Repetir mientras una condición sea verdadera.", "exercises": [{ "type": "code", "question": "Escribe el inicio de un bucle WHILE que dependa de 'activo'.", "answer": "while (activo)" }] },
+                    { "id": "f8", "title": "8. Funciones", "content": "Bloques de código reutilizables.\n\n`function saludar() { ... }`", "exercises": [{ "type": "code", "question": "Declara una función llamada 'inicio'.", "answer": "function inicio()" }] },
+                    { "id": "f9", "title": "9. Parámetros en Funciones", "content": "Pasar información a las funciones para que la procesen.", "exercises": [{ "type": "quiz", "question": "¿Dónde se definen los parámetros?", "options": ["En el nombre", "Entre los paréntesis", "Dentro de las llaves"], "answer": 1 }] },
+                    { "id": "f10", "title": "10. Retorno de Valores", "content": "La palabra clave `return` devuelve un resultado al exterior.", "exercises": [{ "type": "code", "question": "Escribe el comando para devolver el valor 0.", "answer": "return 0" }] }
                 ]
             },
             {
-                "id": "prog-poo",
+                "id": "algo",
+                "title": "Algoritmos (27 Lecciones)",
+                "lessons": [
+                    { "id": "algo-1", "title": "1. ¿Qué es un Algoritmo?", "content": "Serie de pasos finitos y precisos.\n\n### Pseudocódigo:\n1. Inicio\n2. Paso A\n3. Fin", "exercises": [{ "type": "quiz", "question": "¿Un algoritmo debe ser infinito?", "options": ["No, debe ser finito", "Sí, siempre"], "answer": 0 }] },
+                    { "id": "algo-2", "title": "2. Variables en Algoritmos", "content": "Identificadores de espacios en memoria.", "exercises": [{ "type": "code", "question": "Asigna 5 a la variable 'a'.", "answer": "a = 5" }] },
+                    { "id": "algo-3", "title": "3. Operadores Lógicos", "content": "AND (Y), OR (O), NOT (NO).", "exercises": [{ "type": "quiz", "question": "¿Qué devuelve True AND False?", "options": ["True", "False"], "answer": 1 }] },
+                    { "id": "algo-4", "title": "4. Condicionales", "content": "Toma de decisiones lógicas.", "exercises": [{ "type": "code", "question": "Escribe SI x > 0 ENTONCES", "answer": "si x > 0 entonces" }] },
+                    { "id": "algo-5", "title": "5. Bucles", "content": "Iteración de procesos.", "exercises": [{ "type": "code", "question": "Escribe PARA i DESDE 1 HASTA 10", "answer": "para i desde 1 hasta 10" }] },
+                    { "id": "algo-6", "title": "6. Introducción a Big O", "content": "Mide eficiencia temporal y espacial.", "exercises": [{ "type": "quiz", "question": "¿Qué es más rápido?", "options": ["O(n)", "O(1)"], "answer": 1 }] },
+                    { "id": "algo-7", "title": "7. Arreglos (Arrays)", "content": "Estructuras lineales contiguas.", "exercises": [{ "type": "code", "question": "Accede al índice 0 de 'arr'.", "answer": "arr[0]" }] },
+                    { "id": "algo-8", "title": "8. Listas Enlazadas", "content": "Nodos con punteros.", "exercises": [{ "type": "quiz", "question": "¿Cómo se llama el último puntero?", "options": ["Null/Nulo", "Next"], "answer": 0 }] },
+                    { "id": "algo-9", "title": "9. Pilas (Stacks)", "content": "LIFO: Last In, First Out.", "exercises": [{ "type": "quiz", "question": "¿Cuál sale primero?", "options": ["El primero en entrar", "El último en entrar"], "answer": 1 }] },
+                    { "id": "algo-10", "title": "10. Colas (Queues)", "content": "FIFO: First In, First Out.", "exercises": [{ "type": "code", "question": "Método para agregar a la cola.", "answer": "enqueue" }] },
+                    { "id": "algo-11", "title": "11. Búsqueda Lineal", "content": "Revisión secuencial.", "exercises": [{ "type": "quiz", "question": "Complejidad de búsqueda lineal.", "options": ["O(1)", "O(n)"], "answer": 1 }] },
+                    { "id": "algo-12", "title": "12. Búsqueda Binaria", "content": "Divide y vencerás en listas ordenadas.", "exercises": [{ "type": "quiz", "question": "¿Requiere ordenamiento previo?", "options": ["Sí", "No"], "answer": 0 }] },
+                    { "id": "algo-13", "title": "13. Bubble Sort", "content": "Intercambio de adyacentes.", "exercises": [{ "type": "quiz", "question": "Complejidad en peor caso.", "options": ["O(n)", "O(n^2)"], "answer": 1 }] },
+                    { "id": "algo-14", "title": "14. Selection Sort", "content": "Busca el mínimo y lo posiciona.", "exercises": [{ "type": "quiz", "question": "¿Cuántos intercambios hace por vuelta?", "options": ["Uno", "Muchos"], "answer": 0 }] },
+                    { "id": "algo-15", "title": "15. Insertion Sort", "content": "Inserción ordenada.", "exercises": [{ "type": "quiz", "question": "¿Es eficiente para listas casi ordenadas?", "options": ["Sí", "No"], "answer": 0 }] },
+                    { "id": "algo-16", "title": "16. Merge Sort", "content": "División recursiva y mezcla.", "exercises": [{ "type": "quiz", "question": "Complejidad.", "options": ["O(n^2)", "O(n log n)"], "answer": 1 }] },
+                    { "id": "algo-17", "title": "17. Quick Sort", "content": "Uso de pivote.", "exercises": [{ "type": "code", "question": "¿Cómo se llama el elemento base?", "answer": "pivote" }] },
+                    { "id": "algo-18", "title": "18. Recursión", "content": "Auto-llamada con caso base.", "exercises": [{ "type": "code", "question": "¿Qué evita el bucle infinito?", "answer": "caso base" }] },
+                    { "id": "algo-19", "title": "19. Árboles Binarios", "content": "Un padre, dos hijos.", "exercises": [{ "type": "quiz", "question": "¿Cómo se llama el nodo superior?", "options": ["Hoja", "Raíz"], "answer": 1 }] },
+                    { "id": "algo-20", "title": "20. Árboles BST", "content": "Izquierda menor, derecha mayor.", "exercises": [{ "type": "quiz", "question": "¿Dónde va el 5 si la raíz es 10?", "options": ["Izquierda", "Derecha"], "answer": 0 }] },
+                    { "id": "algo-21", "title": "21. Grafos", "content": "Vértices y Aristas.", "exercises": [{ "type": "code", "question": "¿Cómo se llaman las conexiones?", "answer": "aristas" }] },
+                    { "id": "algo-22", "title": "22. BFS", "content": "Búsqueda en amplitud.", "exercises": [{ "type": "quiz", "question": "¿Qué estructura usa BFS?", "options": ["Pila", "Cola"], "answer": 1 }] },
+                    { "id": "algo-23", "title": "23. DFS", "content": "Búsqueda en profundidad.", "exercises": [{ "type": "quiz", "question": "¿Qué estructura usa DFS?", "options": ["Pila", "Cola"], "answer": 0 }] },
+                    { "id": "algo-24", "title": "24. Dijkstra", "content": "Camino más corto.", "exercises": [{ "type": "quiz", "question": "¿Funciona con pesos negativos?", "options": ["Sí", "No"], "answer": 1 }] },
+                    { "id": "algo-25", "title": "25. Greedy", "content": "Optimización local.", "exercises": [{ "type": "quiz", "question": "¿Siempre encuentra el óptimo global?", "options": ["Sí", "No"], "answer": 1 }] },
+                    { "id": "algo-26", "title": "26. Dinámica", "content": "Memoización de subproblemas.", "exercises": [{ "type": "code", "question": "¿Cómo se llama guardar resultados?", "answer": "memoizacion" }] },
+                    { "id": "algo-27", "title": "27. Problemas P vs NP", "content": "Teoría de la complejidad computacional.", "exercises": [{ "type": "quiz", "question": "¿P = NP?", "options": ["Probablemente sí", "Probablemente no"], "answer": 1 }] }
+                ]
+            },
+            {
+                "id": "poo",
                 "title": "Programación Orientada a Objetos",
                 "lessons": [
-                    {
-                        "id": "p-l2",
-                        "title": "Clases",
-                        "content": "Objetos.",
-                        "exercises": []
-                    }
-                ]
-            },
-            {
-                "id": "algo-full",
-                "title": "Curso Maestro de Algoritmos",
-                "lessons": [
-                    {
-                        "id": "algo-1",
-                        "title": "¿Qué es un algoritmo?",
-                        "content": "### MÓDULO 1 — FUNDAMENTOS\n\nUn algoritmo es una serie de pasos ordenados para resolver un problema.\n\nEjemplos cotidianos:\n* Seguir una receta.\n* Atarse los zapatos.\n* Buscar un contacto en el celular.\n\n**Características de un buen algoritmo**\n1. Debe tener pasos claros.\n2. Debe terminar.\n3. Debe resolver el problema.\n4. Debe ser eficiente.",
-                        "details": "### Ejemplo intuitivo\nProblema: Encontrar el número mayor entre 3 números.\nAlgoritmo:\n1. Guardar el primer número como mayor.\n2. Comparar con el segundo.\n3. Si el segundo es mayor, actualizar.\n4. Comparar con el tercero.\n5. Mostrar el mayor.",
-                        "pseudocode": "INICIO\nleer a, b, c\nmayor = a\nsi b > mayor\n   mayor = b\nsi c > mayor\n   mayor = c\nmostrar mayor\nFIN",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 1: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-2",
-                        "title": "Variables y tipos de datos",
-                        "content": "### MÓDULO 1 — FUNDAMENTOS\n\n¿Qué es una variable?\nUna variable es un espacio donde almacenamos información.\n\nEjemplo:\n```text\nedad = 20\nnombre = 'Ana'\n```",
-                        "details": "### Tipos de datos\n* **Enteros:** 5, -10, 100\n* **Decimales:** 3.14, 9.99\n* **Texto:** 'Hola'\n* **Booleanos:** Verdadero, Falso",
-                        "pseudocode": "nombre = 'Luis'\nedad = 25\naltura = 1.75\nes_estudiante = Verdadero",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 2: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-3",
-                        "title": "Operadores",
-                        "content": "### MÓDULO 1 — FUNDAMENTOS\n\nOperadores matemáticos (+, -, *, /, %), relacionales (>, <, >=, <=, ==, !=) y lógicos (AND, OR, NOT).",
-                        "details": "### Ejemplo\n```text\nedad = 20\nsi edad >= 18\n   mostrar 'Mayor de edad'\n```",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 3: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-4",
-                        "title": "Condicionales",
-                        "content": "### MÓDULO 2 — CONTROL DE FLUJO\n\n¿Qué son?\nPermiten tomar decisiones.\n\nEstructura:\n```text\nsi condición\n   acción\nsi no\n   otra acción\n```",
-                        "details": "### Ejemplo\n```text\nsi temperatura > 30\n   mostrar 'Hace calor'\nsi no\n   mostrar 'No hace calor'\n```",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 4: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-5",
-                        "title": "Bucles",
-                        "content": "### MÓDULO 2 — CONTROL DE FLUJO\n\n¿Qué son?\nPermiten repetir acciones.\n\nBucle FOR:\n```text\npara i desde 1 hasta 5\n   mostrar i\n```\n\nBucle WHILE:\n```text\nmientras contador < 5\n   mostrar contador\n```",
-                        "details": "### Ejemplo intuitivo\nImagínate contando escalones:\n1. Subes.\n2. Aumentas contador.\n3. Revisas si terminaste.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 5: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-6",
-                        "title": "Big O",
-                        "content": "### MÓDULO 3 — COMPLEJIDAD ALGORÍTMICA\n\n¿Qué es Big O?\nMide qué tan eficiente es un algoritmo.\n\nEjemplo:\nBuscar una carta:\n* Revisar una por una -> lento.\n* Buscar en un mazo ordenado -> rápido.",
-                        "details": "### Tipos de complejidad\n* O(1): Tiempo constante.\n* O(n): Lineal.\n* O(n²): Dos bucles anidados.\n* O(log n): Divide el problema.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 6: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-7",
-                        "title": "Arreglos",
-                        "content": "### MÓDULO 4 — ESTRUCTURAS DE DATOS\n\n¿Qué son?\nColecciones de elementos.\n```text\n[5, 10, 15, 20]\n```",
-                        "details": "### Acceso\narreglo[0]\n\n**Ventajas:** Acceso rápido.\n**Desventajas:** Tamaño fijo en algunos lenguajes.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 7: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-8",
-                        "title": "Listas enlazadas",
-                        "content": "### MÓDULO 4 — ESTRUCTURAS DE DATOS\n\nIdea intuitiva: Cada elemento apunta al siguiente.\n```text\n[5] -> [10] -> [20]\n```",
-                        "details": "**Ventajas:** Inserciones rápidas.\n**Desventajas:** Acceso lento.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 8: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-9",
-                        "title": "Pilas y colas",
-                        "content": "### MÓDULO 4 — ESTRUCTURAS DE DATOS\n\n**Pilas (Stack)**: Último en entrar, primero en salir. Ejemplo: Pila de platos.\n**Colas (Queue)**: Primero en entrar, primero en salir. Ejemplo: Fila del supermercado.",
-                        "details": "Operaciones Pila: push, pop, top.\nOperaciones Cola: enqueue, dequeue.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 9: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-10",
-                        "title": "Búsqueda lineal",
-                        "content": "### MÓDULO 5 — ALGORITMOS DE BÚSQUEDA\n\nIdea: Revisar elemento por elemento.",
-                        "details": "### Pseudocódigo\n```text\npara cada elemento\n   si elemento == objetivo\n      encontrado\n```\nComplejidad: O(n)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 10: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-11",
-                        "title": "Búsqueda binaria",
-                        "content": "### MÓDULO 5 — ALGORITMOS DE BÚSQUEDA\n\nIdea intuitiva: Buscar en una lista ordenada dividiendo a la mitad. Como buscar una palabra en un diccionario.",
-                        "details": "### Pasos\n1. Revisar centro.\n2. Si el objetivo es menor: Ir izquierda.\n3. Si es mayor: Ir derecha.\nComplejidad: O(log n)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 11: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-12",
-                        "title": "Bubble Sort",
-                        "content": "### MÓDULO 6 — ALGORITMOS DE ORDENAMIENTO\n\nIdea: Comparar vecinos e intercambiar.",
-                        "details": "5 3 8 -> 3 5 8\nComplejidad: O(n²)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 12: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-13",
-                        "title": "Selection Sort",
-                        "content": "### MÓDULO 6 — ALGORITMOS DE ORDENAMIENTO\n\nIdea: Buscar el menor elemento y colocarlo al inicio.",
-                        "details": "Complejidad: O(n²)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 13: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-14",
-                        "title": "Insertion Sort",
-                        "content": "### MÓDULO 6 — ALGORITMOS DE ORDENAMIENTO\n\nIdea intuitiva: Como ordenar cartas en la mano.",
-                        "details": "Complejidad: O(n²)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 14: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-15",
-                        "title": "Merge Sort",
-                        "content": "### MÓDULO 6 — ALGORITMOS DE ORDENAMIENTO\n\nIdea: Dividir y conquistar.\n1. Dividir.\n2. Ordenar.\n3. Combinar.",
-                        "details": "Complejidad: O(n log n)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 15: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-16",
-                        "title": "Quick Sort",
-                        "content": "### MÓDULO 6 — ALGORITMOS DE ORDENAMIENTO\n\nIdea: Elegir pivote. Separar menores y mayores.",
-                        "details": "Complejidad promedio: O(n log n)",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 16: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-17",
-                        "title": "Recursión",
-                        "content": "### MÓDULO 7 — RECURSIÓN\n\n¿Qué es?\nUna función que se llama a sí misma.",
-                        "details": "### Ejemplo factorial\n```text\nfactorial(5) = 5 * factorial(4)\n```\n**Caso base**: Necesario para detener la recursión.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 17: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-18",
-                        "title": "Árboles",
-                        "content": "### MÓDULO 8 — ÁRBOLES\n\nIdea intuitiva: Como un árbol familiar.\n* Raíz.\n* Hijos.\n* Hojas.",
-                        "details": "Árbol binario: Cada nodo tiene máximo 2 hijos.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 18: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-19",
-                        "title": "Árbol binario de búsqueda",
-                        "content": "### MÓDULO 8 — ÁRBOLES\n\nPropiedad:\n* Izquierda menor.\n* Derecha mayor.",
-                        "details": "Operaciones: Insertar, Buscar, Eliminar.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 19: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-20",
-                        "title": "Introducción a grafos",
-                        "content": "### MÓDULO 9 — GRAFOS\n\n¿Qué es un grafo?\nConjunto de Nodos y Conexiones.",
-                        "details": "Ejemplos: Redes sociales, mapas, Internet.\nTipos: Dirigidos, No dirigidos, Ponderados.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 20: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-21",
-                        "title": "BFS y DFS",
-                        "content": "### MÓDULO 9 — GRAFOS\n\n**BFS**: Búsqueda por niveles. Usa cola.\n**DFS**: Explora profundidad. Usa pila o recursión.",
-                        "details": "",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 21: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-22",
-                        "title": "Introducción Programación Dinámica",
-                        "content": "### MÓDULO 10 — PROGRAMACIÓN DINÁMICA\n\nIdea: Guardar resultados para evitar repetir cálculos.",
-                        "details": "Conceptos: Memoización, Tabulación.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 22: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-23",
-                        "title": "Algoritmos voraces",
-                        "content": "### MÓDULO 11 — GREEDY\n\nIdea: Tomar la mejor decisión local.",
-                        "details": "Ejemplos: Cambio de monedas, selección de actividades.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 23: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-24",
-                        "title": "Dijkstra",
-                        "content": "### MÓDULO 12 — ALGORITMOS AVANZADOS\n\nObjetivo: Camino más corto.",
-                        "details": "Aplicaciones: GPS, Redes, Rutas.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 24: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-25",
-                        "title": "Algoritmos de cadenas",
-                        "content": "### MÓDULO 12 — ALGORITMOS AVANZADOS\n\nProblemas comunes: Buscar palabras, comparar textos, detectar patrones.",
-                        "details": "",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 25: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-26",
-                        "title": "Cómo resolver problemas",
-                        "content": "### MÓDULO 13 — PRÁCTICA REAL\n\nMétodo recomendado: Entender, ejemplos, patrones, eficiencia, pseudocódigo, implementar, probar.",
-                        "details": "",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 26: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    },
-                    {
-                        "id": "algo-27",
-                        "title": "Problemas clásicos",
-                        "content": "### MÓDULO 14 — ENTREVISTAS TÉCNICAS\n\nTemas frecuentes: Arrays, Hash maps, Recursión, Árboles, Grafos.",
-                        "details": "Estrategia: Explicar idea, resolver caso simple, optimizar, analizar complejidad.",
-                        "pseudocode": "",
-                        "exercises": [
-                            {
-                                "type": "code",
-                                "question": "Reto Lección 27: Escribe tu algoritmo.",
-                                "answer": "ok"
-                            }
-                        ]
-                    }
+                    { "id": "p1", "title": "1. Clases y Objetos", "content": "Plano vs Construcción.", "exercises": [{ "type": "code", "question": "Escribe class Coche", "answer": "class coche" }] },
+                    { "id": "p2", "title": "2. Abstracción", "content": "Enfocarse en lo esencial.", "exercises": [{ "type": "quiz", "question": "¿Qué es abstracción?", "options": ["Ocultar detalles", "Mostrar todo"], "answer": 0 }] },
+                    { "id": "p3", "title": "3. Encapsulamiento", "content": "Protección de datos (private).", "exercises": [{ "type": "code", "question": "Usa # para campo privado en JS.", "answer": "#" }] },
+                    { "id": "p4", "title": "4. Herencia", "content": "Reutilizar código de clases padre.", "exercises": [{ "type": "code", "question": "Palabra clave en JS para heredar.", "answer": "extends" }] },
+                    { "id": "p5", "title": "5. Polimorfismo", "content": "Muchas formas para un mismo método.", "exercises": [{ "type": "quiz", "question": "¿Qué permite el polimorfismo?", "options": ["Diferentes resultados con misma llamada", "Copiar código"], "answer": 0 }] }
                 ]
             }
         ]
     },
     {
         "id": "english",
-        "title": "Inglés",
+        "title": "Inglés Técnico",
         "icon": "translate",
         "color": "#2196F3",
         "topics": [
             {
-                "id": "eng-v",
-                "title": "Vocabulario",
+                "id": "eng-main",
+                "title": "20 Clases de Inglés",
                 "lessons": [
-                    {
-                        "id": "e-v-1",
-                        "title": "Clase 1: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-2",
-                        "title": "Clase 2: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-3",
-                        "title": "Clase 3: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-4",
-                        "title": "Clase 4: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-5",
-                        "title": "Clase 5: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-6",
-                        "title": "Clase 6: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-7",
-                        "title": "Clase 7: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-8",
-                        "title": "Clase 8: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-9",
-                        "title": "Clase 9: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-v-10",
-                        "title": "Clase 10: Vocabulario",
-                        "content": "Aprenderemos nuevas palabras.",
-                        "exercises": []
-                    }
-                ]
-            },
-            {
-                "id": "eng-g",
-                "title": "Gramática",
-                "lessons": [
-                    {
-                        "id": "e-g-11",
-                        "title": "Clase 11: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-12",
-                        "title": "Clase 12: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-13",
-                        "title": "Clase 13: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-14",
-                        "title": "Clase 14: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-15",
-                        "title": "Clase 15: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-16",
-                        "title": "Clase 16: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-17",
-                        "title": "Clase 17: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-18",
-                        "title": "Clase 18: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-19",
-                        "title": "Clase 19: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "e-g-20",
-                        "title": "Clase 20: Gramática",
-                        "content": "Construcción de frases.",
-                        "exercises": []
-                    }
+                    { "id": "e1", "title": "1. Greetings & Introductions", "content": "Hello, Hi, Good morning.", "exercises": [{ "type": "quiz", "question": "Formal greeting:", "options": ["Sup", "How do you do?", "Hey"], "answer": 1 }] },
+                    { "id": "e2", "title": "2. Numbers and Time", "content": "One, Two, Three... It's five o'clock.", "exercises": [{ "type": "code", "question": "Write '12' in English.", "answer": "twelve" }] },
+                    { "id": "e3", "title": "3. Personal Information", "content": "I am... I live in...", "exercises": [{ "type": "code", "question": "Translate 'Mi nombre es'", "answer": "my name is" }] },
+                    { "id": "e4", "title": "4. Colors and Descriptions", "content": "Red, Blue, Big, Small.", "exercises": [{ "type": "quiz", "question": "Opposite of Big:", "options": ["Large", "Small"], "answer": 1 }] },
+                    { "id": "e5", "title": "5. The Family", "content": "Father, Mother, Brother.", "exercises": [{ "type": "code", "question": "Translate 'Hermana'", "answer": "sister" }] },
+                    { "id": "e6", "title": "6. Food and Drinks", "content": "Water, Bread, Apple.", "exercises": [{ "type": "quiz", "question": "Is it a fruit?", "options": ["Bread", "Banana"], "answer": 1 }] },
+                    { "id": "e7", "title": "7. Daily Routine", "content": "I wake up, I go to work.", "exercises": [{ "type": "code", "question": "Translate 'Despertar'", "answer": "wake up" }] },
+                    { "id": "e8", "title": "8. Hobbies", "content": "Reading, Swimming, Coding.", "exercises": [{ "type": "code", "question": "Translate 'Nadar'", "answer": "swim" }] },
+                    { "id": "e9", "title": "9. The House", "content": "Kitchen, Bedroom, Living room.", "exercises": [{ "type": "quiz", "question": "Where do you cook?", "options": ["Kitchen", "Garden"], "answer": 0 }] },
+                    { "id": "e10", "title": "10. In the City", "content": "Bank, Hospital, Park.", "exercises": [{ "type": "code", "question": "Translate 'Hospital'", "answer": "hospital" }] },
+                    { "id": "e11", "title": "11. Transport", "content": "Car, Bus, Plane.", "exercises": [{ "type": "quiz", "question": "It flies:", "options": ["Train", "Plane"], "answer": 1 }] },
+                    { "id": "e12", "title": "12. The Weather", "content": "Sunny, Rainy, Cold.", "exercises": [{ "type": "code", "question": "Translate 'Soleado'", "answer": "sunny" }] },
+                    { "id": "e13", "title": "13. Jobs", "content": "Doctor, Engineer, Developer.", "exercises": [{ "type": "code", "question": "Translate 'Ingeniero'", "answer": "engineer" }] },
+                    { "id": "e14", "title": "14. Parts of the Body", "content": "Head, Shoulders, Knees.", "exercises": [{ "type": "code", "question": "Translate 'Cabeza'", "answer": "head" }] },
+                    { "id": "e15", "title": "15. Clothes", "content": "Shirt, Pants, Shoes.", "exercises": [{ "type": "quiz", "question": "For your feet:", "options": ["Hat", "Shoes"], "answer": 1 }] },
+                    { "id": "e16", "title": "16. Present Simple", "content": "I work, You work, He works.", "exercises": [{ "type": "code", "question": "Add 's' to 'play' for 'He'.", "answer": "plays" }] },
+                    { "id": "e17", "title": "17. Present Continuous", "content": "I am working.", "exercises": [{ "type": "code", "question": "Add 'ing' to 'run'.", "answer": "running" }] },
+                    { "id": "e18", "title": "18. Past Simple", "content": "I worked.", "exercises": [{ "type": "code", "question": "Past of 'go'.", "answer": "went" }] },
+                    { "id": "e19", "title": "19. Future with Will", "content": "I will go.", "exercises": [{ "type": "code", "question": "Future of 'eat'.", "answer": "will eat" }] },
+                    { "id": "e20", "title": "20. Tech English", "content": "Merge, Commit, Deploy.", "exercises": [{ "type": "quiz", "question": "Send to production:", "options": ["Delete", "Deploy"], "answer": 1 }] }
                 ]
             }
         ]
@@ -562,21 +108,25 @@ const coursesData = [
         "color": "#FF9800",
         "topics": [
             {
-                "id": "db-m",
-                "title": "Modelo E-R y SQL",
+                "id": "db-er",
+                "title": "Modelo Entidad Relación",
                 "lessons": [
-                    {
-                        "id": "d-l1",
-                        "title": "Modelo Entidad Relación",
-                        "content": "Diseño.",
-                        "exercises": []
-                    },
-                    {
-                        "id": "d-l2",
-                        "title": "Consultas SQL",
-                        "content": "SELECT, FROM, WHERE.",
-                        "exercises": []
-                    }
+                    { "id": "d1", "title": "1. Entidades", "content": "Objetos del mundo real.", "exercises": [{ "type": "code", "question": "Nombre de entidad para usuarios.", "answer": "usuario" }] },
+                    { "id": "d2", "title": "2. Atributos", "content": "Propiedades de las entidades.", "exercises": [{ "type": "quiz", "question": "¿Es un atributo de Persona?", "options": ["Caminar", "Nombre"], "answer": 1 }] },
+                    { "id": "d3", "title": "3. Relaciones", "content": "Vínculos entre entidades.", "exercises": [{ "type": "code", "question": "Verbo para relación Cliente-Pedido.", "answer": "hace" }] },
+                    { "id": "d4", "title": "4. Cardinalidad", "content": "1:1, 1:N, N:M.", "exercises": [{ "type": "quiz", "question": "Un país tiene muchos ciudadanos:", "options": ["1:1", "1:N"], "answer": 1 }] }
+                ]
+            },
+            {
+                "id": "db-sql",
+                "title": "Lenguaje SQL",
+                "lessons": [
+                    { "id": "d5", "title": "5. SELECT", "content": "Obtener datos.", "exercises": [{ "type": "code", "question": "Selecciona todo de 'users'.", "answer": "select * from users" }] },
+                    { "id": "d6", "title": "6. WHERE", "content": "Filtrar datos.", "exercises": [{ "type": "code", "question": "Filtra donde id sea 1.", "answer": "where id = 1" }] },
+                    { "id": "d7", "title": "7. ORDER BY", "content": "Ordenar resultados.", "exercises": [{ "type": "code", "question": "Ordena por 'nombre'.", "answer": "order by nombre" }] },
+                    { "id": "d8", "title": "8. INSERT", "content": "Agregar registros.", "exercises": [{ "type": "code", "question": "Comando para insertar.", "answer": "insert into" }] },
+                    { "id": "d9", "title": "9. UPDATE", "content": "Modificar registros.", "exercises": [{ "type": "code", "question": "Comando para actualizar.", "answer": "update" }] },
+                    { "id": "d10", "title": "10. DELETE", "content": "Eliminar registros.", "exercises": [{ "type": "code", "question": "Comando para borrar.", "answer": "delete from" }] }
                 ]
             }
         ]
